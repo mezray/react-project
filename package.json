@@ -1,5 +1,5 @@
 {
-  "name": "react-proj",
+  "name": "react_project",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,17 +9,24 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "14.1.0",
+    "@prisma/client": "^5.11.0",
+    "next": "14.1.4",
     "react": "^18",
     "react-dom": "^18"
   },
   "devDependencies": {
-    "@types/node": "^20",
+    "@types/node": "^20.11.30",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
-    "eslint-config-next": "14.1.0",
-    "prettier": "3.2.5",
-    "typescript": "^5"
-  }
+    "eslint-config-next": "14.1.4",
+    "prisma": "^5.11.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.2"
+  },
+  "description": "This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

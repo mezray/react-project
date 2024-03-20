@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Menu from "./components/menu";
+import HomePage from "./HomePage/HomePage";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,7 +27,7 @@ export default function RootLayout({
               backgroundColor: "#f5f5f5",
             }}
           >
-            <Menu />
+            <HomePage />
           </div>
           <div style={{ flex: "1", overflow: "auto" }}>{children}</div>
         </div>
