@@ -7,8 +7,8 @@ export default async function handle(
   res: NextApiResponse,
 ) {
   const postId = req.query.id
-  const post = await prisma.tricount.findMany({
-    where: { id: Number(postId) }
+  const tricount = await prisma.cost.findMany({
+    where: { tricountId: Number(postId) }
   })
-  return res.json(post)
+  return res.status(200).json(tricount)
 }
