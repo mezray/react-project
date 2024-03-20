@@ -43,5 +43,3 @@ export default function TricountForm() {
         </>
     )
 }
-
-//TODO : Add useEffect to refresh page after adding a tricount
