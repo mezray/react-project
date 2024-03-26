@@ -6,13 +6,12 @@ import { useRouter } from 'next/navigation'
 export default function TricountForm() {
     const [title, setTitle] = useState('')
     const router = useRouter()
-    
+
     const submitData = async (e: React.SyntheticEvent) => {
         e.preventDefault()
         try {
-            console.log("eeee");
             const body = { title }
-            await fetch(`/api/post`, {
+            await fetch(`/api/post/${title}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(body),
