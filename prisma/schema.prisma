@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -14,26 +8,30 @@ datasource db {
 }
 
 model Tricount {
-  id    Int    @id @default(autoincrement())
-  name  String
-  total Float  @default(0)
-  Cost  Cost[]
+  id       Int      @id @default(autoincrement())
+  name     String
+  total    Float    @default(0)
+  users    User[]   @relation("UserTricount")
+  costs    Cost[]   @relation("TricountCosts")
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  name  String?
-  costs Cost[]  @relation("Debtors")
-  Cost  Cost[]
+  id         Int      @id @default(autoincrement())
+  name       String?
+  email      String   @unique
+  password   String
+  tricounts  Tricount[]  @relation("UserTricount")
+  costs      Cost[]      @relation("Debtors")
+  paidCosts  Cost[]      @relation("PayerCosts")
 }
 
 model Cost {
   id         Int      @id @default(autoincrement())
   title      String
   price      Float
-  tricount   Tricount @relation(fields: [tricountId], references: [id])
+  tricount   Tricount @relation("TricountCosts", fields: [tricountId], references: [id])
   tricountId Int
-  payer      User     @relation(fields: [payerId], references: [id])
+  payer      User     @relation("PayerCosts", fields: [payerId], references: [id])
   payerId    Int
   debtors    User[]   @relation("Debtors")
 }

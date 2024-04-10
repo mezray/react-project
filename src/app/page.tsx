@@ -1,10 +1,10 @@
-import HomePage from '../app/HomePage/HomePage';
+import Link from 'next/link';
+import WelcomePage from './pages/WelcomePage/page';
 
 export default function Home() {
   return (
     <div>
-     TeTTS
-    
+      <WelcomePage />
     </div>
-  );
+  )
 }

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import HomePage from "./HomePage/HomePage";
+import WelcomePage from "./pages/WelcomePage/page";
+import LoggoutButton from "@/components/LogoutButton";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,8 +27,10 @@ export default function RootLayout({
               overflow: "auto",
               backgroundColor: "#f5f5f5",
             }}
-          >
-            <HomePage />
+          >     
+          <div>
+          <LoggoutButton />
+          </div>
           </div>
           <div style={{ flex: "1", overflow: "auto" }}>{children}</div>
         </div>

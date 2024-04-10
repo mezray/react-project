@@ -10,33 +10,21 @@ export async function GET(request: Request, { params }: { params: { id: string }
     throw new Error('No token provided')
   }
 
-  let userId
   try {
-    const decoded = jwt.verify(token, SECRET_KEY) // Replace with your actual secret key
-    userId = decoded.id
+    jwt.verify(token, SECRET_KEY) // Replace with your actual secret key
   } catch (err) {
     throw new Error('Failed to authenticate token')
   }
-  const id = params.id;
-  
-  const cost = await prisma.cost.findMany({
-  select: {
-    title: true,
-    price: true,
-    payer: { 
-      select: {
-        name: true,
+
+  const allUsers = await prisma.user.findMany({
+    where: {
+      tricounts: {
+        some: {
+          id: Number(params.id),
+        },
       },
     },
-    debtors: {
-      select: {
-        name: true,
-      },
-    },
-  },
-  where: {
-    tricountId: Number(id),
-  },
-});
-return Response.json(cost); 
+  });
+
+  return Response.json(allUsers); 
 }

@@ -10,18 +10,23 @@ export default function TricountForm() {
     const submitData = async (e: React.SyntheticEvent) => {
         e.preventDefault()
         try {
-            const body = { title }
-            await fetch(`/api/post/${title}`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(body),
-            })
-
-            router.push('/')
+          const body = { title } 
+          const token = localStorage.getItem('token')
+      
+          await fetch(`/api/post/`, {
+            method: 'POST',
+            headers: { 
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify(body),
+          })
+      
+          router.push('/pages/HomePage')
         } catch (error) {
-            console.error(error)
+          console.error(error)
         }
-    }
+      }
 
     return (
         <>
