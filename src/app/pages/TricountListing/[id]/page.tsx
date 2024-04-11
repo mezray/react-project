@@ -6,6 +6,7 @@ import AddUserToTricount from '@/components/AddUserToTricount';
 
 function TricountPage({ params: { id } }) {
   const [tricounts, setTricounts] = useState(null);
+  const [debts, setDebts] = useState({});
   const router = useRouter();
 
   useEffect(() => {
@@ -20,11 +21,33 @@ function TricountPage({ params: { id } }) {
 
       setTricounts(data);
 
+      const newDebts = {};
+      data.forEach(tricount => {
+        const amount = tricount.price / tricount.debtors.length;
+        tricount.debtors.forEach(debtor => {
+          if (debtor.name !== tricount.payer.name) {
+            newDebts[debtor.name] = newDebts[debtor.name] || {};
+            newDebts[debtor.name][tricount.payer.name] = (newDebts[debtor.name][tricount.payer.name] || 0) + amount;
+          }
+        });
+      });
+
+      // Offset debts
+      for (const [name, debtToOthers] of Object.entries(newDebts)) {
+        for (const [otherName, amount] of Object.entries(debtToOthers)) {
+          if (newDebts[otherName] && newDebts[otherName][name]) {
+            const minDebt = Math.min(amount, newDebts[otherName][name]);
+            newDebts[name][otherName] -= minDebt;
+            newDebts[otherName][name] -= minDebt;
+          }
+        }
+      }
+
+      setDebts(newDebts);
     };
 
     fetchTricounts();
   }, [id]);
-
 
   if (!tricounts) {
     return <div>Loading...</div>;
@@ -54,17 +77,22 @@ function TricountPage({ params: { id } }) {
             <td>Total:</td>
             <td>{tricounts.reduce((total, tricount) => total + tricount.price, 0)}€</td>
           </tr>
-          {Object.entries(
-            tricounts.reduce((acc, tricount) => {
-              tricount.debtors.forEach((debtor) => {
-                acc[debtor.name] = (acc[debtor.name] || 0) + tricount.price / tricount.debtors.length;
-              });
-              return acc;
-            }, {})
-          ).map(([name, debt], index) => (
+        </tbody>
+      </table>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Net Debt</th>
+          </tr>
+        </thead>
+        <tbody>
+          {Object.entries(debts).map(([name, debtToOthers], index) => (
             <tr key={index}>
-              <td>{name} debt:</td>
-              <td>{debt.toFixed(2)}€</td>
+              <td>{name} owes:</td>
+              {Object.entries(debtToOthers).map(([otherName, amount]) => (
+                <td key={otherName}>{otherName}: {amount.toFixed(2)}€</td>
+              ))}
             </tr>
           ))}
         </tbody>
