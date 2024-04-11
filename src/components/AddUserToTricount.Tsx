@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 function AddUserToTricount({ tricountId }: { tricountId: any }) {
   const [email, setEmail] = useState('');
+  const router = useRouter();
 
   const handleSubmit = async (event: { preventDefault: () => void; }) => {
     event.preventDefault();
@@ -17,7 +19,6 @@ function AddUserToTricount({ tricountId }: { tricountId: any }) {
     });
 
     const data = await response.json();
-    // Handle the response...
   };
 
   return (

@@ -18,6 +18,11 @@ function AddCost({ tricountId }: { tricountId: any }) {
       });
       const allUsers = await response.json();
       setUsers(allUsers);
+
+      // Set initial payerId to the id of the first user if users exist
+      if (allUsers.length > 0) {
+        setPayerId(allUsers[0].id);
+      }
     }
 
     fetchUsers();
