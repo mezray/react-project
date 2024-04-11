@@ -2,8 +2,7 @@ import prisma from '../../../lib/prisma'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
 
-// This should be a secure, random string
-const SECRET_KEY = '1234'
+const SECRET_KEY = process.env.SECRET_KEY
 
 export async function POST(request: Request) {
   const body = await request.json();

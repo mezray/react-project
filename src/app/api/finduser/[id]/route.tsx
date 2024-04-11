@@ -1,20 +1,9 @@
 import prisma from '../../../../lib/prisma'
 import jwt from 'jsonwebtoken'
-
-// This should be a secure, random string
-const SECRET_KEY = '1234'
+import { verifyToken } from '../../../../lib/auth';
 
 export async function GET(request: Request, { params }: { params: { id: string } }) {
-  const token = request.headers.get('authorization')?.split(' ')[1]
-  if (!token) {
-    throw new Error('No token provided')
-  }
-
-  try {
-    jwt.verify(token, SECRET_KEY) // Replace with your actual secret key
-  } catch (err) {
-    throw new Error('Failed to authenticate token')
-  }
+  verifyToken(request);
 
   const allUsers = await prisma.user.findMany({
     where: {

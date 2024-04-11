@@ -36,7 +36,7 @@ export default function HomePage() {
       <TricountForm />
       {feed.map((tricount) => (
         <Link href={`/pages/tricount/${tricount.id}`}>
-          {tricount.id}. {tricount.name}
+          <div>{tricount.id}. {tricount.name}</div>
         </Link>
       ))}
 
