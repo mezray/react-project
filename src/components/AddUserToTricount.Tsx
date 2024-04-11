@@ -7,7 +7,7 @@ function AddUserToTricount({ tricountId }) {
     event.preventDefault();
 
     const token = localStorage.getItem('token');
-    const response = await fetch(`/api/addusertotricount/${tricountId}`, {
+    const response = await fetch(`/api/Tricounts/Tricount/AddUserToTricount/${tricountId}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

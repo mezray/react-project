@@ -1,6 +1,5 @@
-import prisma from '../../../../lib/prisma';
-import jwt from 'jsonwebtoken';
-import { verifyToken } from '../../../../lib/auth';
+import prisma from '@/lib/prisma';
+import { verifyToken } from '@/lib/auth';
 
 
 export async function POST(request: Request, { params }: { params: { id: string } }) {

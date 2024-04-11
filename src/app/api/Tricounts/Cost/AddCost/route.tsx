@@ -1,8 +1,5 @@
-import prisma from '../../../lib/prisma'
-import jwt from 'jsonwebtoken'
-import { verifyToken } from '../../../lib/auth';
-
-const SECRET_KEY = process.env.SECRET_KEY
+import prisma from '@/lib/prisma'
+import { verifyToken } from '@/lib/auth';
 
 export async function POST(request: Request) {
   const userId = verifyToken(request);

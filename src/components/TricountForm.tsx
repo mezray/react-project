@@ -13,7 +13,7 @@ export default function TricountForm() {
           const body = { title } 
           const token = localStorage.getItem('token')
       
-          await fetch(`/api/post/`, {
+          await fetch(`/api/Tricounts/Tricount/CreateNewTricount`, {
             method: 'POST',
             headers: { 
               'Content-Type': 'application/json',
@@ -32,11 +32,11 @@ export default function TricountForm() {
         <>
             <div>
                 <form onSubmit={submitData}>
-                    <h3>Add Tricount</h3>
+                    <h4>Add a new Tricount</h4>
                     <input
                         autoFocus
                         onChange={(e) => setTitle(e.target.value)}
-                        placeholder="Name"
+                        placeholder="Title of the tricount"
                         type="text"
                         value={title}
                     />

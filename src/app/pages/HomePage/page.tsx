@@ -12,17 +12,15 @@ export default function HomePage() {
       // Get the token from localStorage
       const token = localStorage.getItem('token')
 
-      const res = await fetch('/api/tricountlist/', {
+      const res = await fetch('/api/Tricounts/Tricount/TricountListing/', {
         headers: {
           // Include the token in the Authorization header
           Authorization: `Bearer ${token}`,
         },
         credentials: "include",
-
-
       })
+
       const data = await res.json()
-      console.log(data);
       setFeed(data)
     }
 
@@ -31,15 +29,13 @@ export default function HomePage() {
 
   return (
     <>
-      <h1>Tricount's List</h1>
-
-      <TricountForm />
+      <h1>Your Tricount's List</h1>
       {feed.map((tricount) => (
-        <Link href={`/pages/tricount/${tricount.id}`}>
+        <Link href={`/pages/TricountListing/${tricount.id}`}>
           <div>{tricount.id}. {tricount.name}</div>
         </Link>
       ))}
-
+      <TricountForm />
     </>
   )
 }

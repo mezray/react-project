@@ -11,7 +11,7 @@ function TricountPage({ params: { id } }) {
   useEffect(() => {
     const fetchTricounts = async () => {
       const token = localStorage.getItem('token');
-      const response = await fetch(`/api/tricount/${id}`, {
+      const response = await fetch(`/api/Tricounts/Cost/FindAllCost/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

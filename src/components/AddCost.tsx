@@ -12,7 +12,7 @@ function AddCost({ tricountId }) {
   useEffect(() => {
     async function fetchUsers() {
       const token = localStorage.getItem('token');
-      const response = await fetch(`/api/finduser/${tricountId}`, {
+      const response = await fetch(`/api/Tricounts/Tricount/FindUser/${tricountId}`, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
@@ -30,7 +30,7 @@ function AddCost({ tricountId }) {
     event.preventDefault();
 
     const token = localStorage.getItem('token');
-    const response = await fetch('/api/addcost', {
+    const response = await fetch('/api/Tricounts/Cost/AddCost', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
