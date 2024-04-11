@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
-function AddUserToTricount({ tricountId }) {
+function AddUserToTricount({ tricountId }: { tricountId: any }) {
   const [email, setEmail] = useState('');
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: { preventDefault: () => void; }) => {
     event.preventDefault();
 
     const token = localStorage.getItem('token');

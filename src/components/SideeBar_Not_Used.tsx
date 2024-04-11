@@ -1,7 +1,6 @@
 'use client'
 import React from 'react';
 import HomePage from '../app/pages/HomePage/page'
-import TricountForm from './TricountForm'
 
 const Sidebar = () => {
     return (

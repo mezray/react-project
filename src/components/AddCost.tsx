@@ -1,12 +1,10 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 
-function AddCost({ tricountId }) {
+function AddCost({ tricountId }: { tricountId: any }) {
   const [title, setTitle] = useState('');
   const [price, setPrice] = useState('');
-  const [payerName, setPayerName] = useState('');
   const [users, setUsers] = useState([]);
-  const [debtorNames, setDebtorNames] = useState([]);
   const [payerId, setPayerId] = useState('');
   const [debtorIds, setDebtorIds] = useState([]);
   useEffect(() => {
@@ -26,7 +24,7 @@ function AddCost({ tricountId }) {
   }, [tricountId]);
 
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: { preventDefault: () => void; }) => {
     event.preventDefault();
 
     const token = localStorage.getItem('token');
