@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from 'next/navigation';
 import AddCost from '@/components/AddCost';
+import AddUserToTricount from '@/components/AddUserToTricount';
 
 function TricountPage( { params: { id } } ) {
   const [tricounts, setTricounts] = useState(null);
@@ -65,6 +66,9 @@ function TricountPage( { params: { id } } ) {
       ))}
     </tbody>
   </table>
+  <div>
+  <AddUserToTricount tricountId={id} />
+</div>
   <div>
     <AddCost tricountId={id} />
   </div>
