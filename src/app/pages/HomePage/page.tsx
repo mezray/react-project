@@ -1,30 +1,15 @@
 'use client'
 import TricountForm from '../../../components/TricountForm';
 import Link from 'next/link';
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
+import { TricountContext } from '@/context/tricount';
 
 
 export default function HomePage() {
-  const [feed, setFeed] = useState([])
+  const { feed, updateFeed } = useContext(TricountContext)
 
   useEffect(() => {
-    const fetchData = async () => {
-      // Get the token from localStorage
-      const token = localStorage.getItem('token')
-
-      const res = await fetch('/api/Tricounts/Tricount/TricountListing/', {
-        headers: {
-          // Include the token in the Authorization header
-          Authorization: `Bearer ${token}`,
-        },
-        credentials: "include",
-      })
-
-      const data = await res.json()
-      setFeed(data)
-    }
-
-    fetchData()
+    updateFeed()
   }, [])
 
   return (

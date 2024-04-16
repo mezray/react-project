@@ -1,11 +1,13 @@
 'use client'
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { TricountContext } from "@/context/tricount";
 import { useRouter } from 'next/navigation'
 
 
 export default function TricountForm() {
     const [title, setTitle] = useState('')
     const router = useRouter()
+    const { feed, updateFeed } = useContext(TricountContext)
 
     const submitData = async (e: React.SyntheticEvent) => {
         e.preventDefault()
@@ -21,6 +23,7 @@ export default function TricountForm() {
             },
             body: JSON.stringify(body),
           })
+          await updateFeed()
       
           router.push('/pages/HomePage')
         } catch (error) {
