@@ -1,32 +1,25 @@
 "use client"
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { UserContext } from '@/context/user';
 
 function AddCost({ tricountId }: { tricountId: any }) {
   const [title, setTitle] = useState('');
   const [price, setPrice] = useState('');
-  const [users, setUsers] = useState([]);
+  const { users, fetchUsers, setId } = useContext(UserContext);
   const [payerId, setPayerId] = useState('');
   const [debtorIds, setDebtorIds] = useState([]);
   useEffect(() => {
-    async function fetchUsers() {
-      const token = localStorage.getItem('token');
-      const response = await fetch(`/api/Tricounts/Tricount/FindUser/${tricountId}`, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-      });
-      const allUsers = await response.json();
-      setUsers(allUsers);
-
-      // Set initial payerId to the id of the first user if users exist
-      if (allUsers.length > 0) {
-        setPayerId(allUsers[0].id);
-      }
-    }
-
+    setId(tricountId);
     fetchUsers();
   }, [tricountId]);
+  useEffect(
+    () => {
+      if (users.length > 0) {
+        setPayerId(users[0].id);
+      }
+    },
+    [users]
+  )
 
 
   const handleSubmit = async (event: { preventDefault: () => void; }) => {

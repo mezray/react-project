@@ -22,5 +22,5 @@ export async function POST(request: Request, { params }: { params: { id: string 
     },
   });
 
-  return Response.json({ success: true });
+  return Response.json({ success: true, user });
 }

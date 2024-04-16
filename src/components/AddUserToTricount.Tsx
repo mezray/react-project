@@ -1,24 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useContext } from 'react'; 
+import { UserContext } from '@/context/user';
 
 function AddUserToTricount({ tricountId }: { tricountId: any }) {
   const [email, setEmail] = useState('');
+  const { users, addUser, setId } = useContext(UserContext);
+  useEffect(() => {
+    setId(tricountId)
+  }, [tricountId])
   const router = useRouter();
 
   const handleSubmit = async (event: { preventDefault: () => void; }) => {
     event.preventDefault();
-
-    const token = localStorage.getItem('token');
-    const response = await fetch(`/api/Tricounts/Tricount/AddUserToTricount/${tricountId}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
-      },
-      body: JSON.stringify({ email }),
-    });
-
-    const data = await response.json();
+    await addUser(email)
   };
 
   return (

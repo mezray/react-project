@@ -1,8 +1,9 @@
-"use client"
+"use client";
 import React, { useState, useEffect } from "react";
-import { useRouter } from 'next/navigation';
-import AddCost from '@/components/AddCost';
-import AddUserToTricount from '@/components/AddUserToTricount';
+import { useRouter } from "next/navigation";
+import AddCost from "@/components/AddCost";
+import AddUserToTricount from "@/components/AddUserToTricount";
+import { UserContextProvider } from "@/context/user";
 
 function TricountPage({ params: { id } }) {
   const [tricounts, setTricounts] = useState(null);
@@ -11,7 +12,7 @@ function TricountPage({ params: { id } }) {
 
   useEffect(() => {
     const fetchTricounts = async () => {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
       const response = await fetch(`/api/Tricounts/Cost/FindAllCost/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -22,12 +23,13 @@ function TricountPage({ params: { id } }) {
       setTricounts(data);
 
       const newDebts = {};
-      data.forEach(tricount => {
+      data.forEach((tricount) => {
         const amount = tricount.price / tricount.debtors.length;
-        tricount.debtors.forEach(debtor => {
+        tricount.debtors.forEach((debtor) => {
           if (debtor.name !== tricount.payer.name) {
             newDebts[debtor.name] = newDebts[debtor.name] || {};
-            newDebts[debtor.name][tricount.payer.name] = (newDebts[debtor.name][tricount.payer.name] || 0) + amount;
+            newDebts[debtor.name][tricount.payer.name] =
+              (newDebts[debtor.name][tricount.payer.name] || 0) + amount;
           }
         });
       });
@@ -70,12 +72,17 @@ function TricountPage({ params: { id } }) {
               <td>{tricount.title}</td>
               <td>{tricount.price}€</td>
               <td>{tricount.payer.name}</td>
-              <td>{tricount.debtors.map(debtor => debtor.name).join(', ')}</td>
+              <td>
+                {tricount.debtors.map((debtor) => debtor.name).join(", ")}
+              </td>
             </tr>
           ))}
           <tr>
             <td>Total:</td>
-            <td>{tricounts.reduce((total, tricount) => total + tricount.price, 0)}€</td>
+            <td>
+              {tricounts.reduce((total, tricount) => total + tricount.price, 0)}
+              €
+            </td>
           </tr>
         </tbody>
       </table>
@@ -91,19 +98,26 @@ function TricountPage({ params: { id } }) {
             <tr key={index}>
               <td>{name} owes:</td>
               {Object.entries(debtToOthers).map(([otherName, amount]) => (
-                <td key={otherName}>{otherName}: {amount.toFixed(2)}€</td>
+                <td key={otherName}>
+                  {otherName}: {amount.toFixed(2)}€
+                </td>
               ))}
             </tr>
           ))}
         </tbody>
       </table>
-      <div>
-        <AddUserToTricount tricountId={id} />
-      </div>
-      <div>
-        <AddCost tricountId={id} />
-      </div>
-      <button type="button" onClick={() => router.back()}>Back</button>
+
+      <UserContextProvider>
+        <div>
+          <AddUserToTricount tricountId={id} />
+        </div>
+        <div>
+          <AddCost tricountId={id} />
+        </div>
+      </UserContextProvider>
+      <button type="button" onClick={() => router.back()}>
+        Back
+      </button>
     </>
   );
 }
