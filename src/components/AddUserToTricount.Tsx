@@ -18,7 +18,7 @@ function AddUserToTricount({ tricountId }: { tricountId: any }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="add-user-form" onSubmit={handleSubmit}>
       <label>
         Email:
         <input type="email" value={email} onChange={e => setEmail(e.target.value)} required />

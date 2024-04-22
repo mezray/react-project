@@ -3,6 +3,7 @@ import TricountForm from '../../../components/TricountForm';
 import Link from 'next/link';
 import { useEffect, useState, useContext } from 'react'
 import { TricountContext } from '@/context/tricount';
+import "../../style.css"
 
 
 export default function HomePage() {
@@ -13,7 +14,7 @@ export default function HomePage() {
   }, [])
 
   return (
-    <>
+    <div className="home-page">
       <h1>Your Tricount's List</h1>
       {feed.map((tricount) => (
         <Link href={`/pages/TricountListing/${tricount.id}`}>
@@ -21,6 +22,6 @@ export default function HomePage() {
         </Link>
       ))}
       <TricountForm />
-    </>
+    </div>
   )
 }

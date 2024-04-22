@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { useRouter } from 'next/navigation';
 import ButtonBack from "@/components/ButtonBack";
-
+import "../../../style.css"
 
 export default function LoginPage() {
     const [email, setEmail] = useState('')
@@ -34,7 +34,7 @@ export default function LoginPage() {
     }
     return (
         <>
-            <div>
+            <div className="login-page">
                 <form>
                     <h3>Hello !</h3>
                     <input

@@ -2,8 +2,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { UserContext } from '@/context/user';
 import { TransactionContext } from '@/context/transaction';
+import "../app/style.css";
 
-function AddCost({ tricountId }: { tricountId: any }) {
+function AddTransaction({ tricountId }: { tricountId: any }) {
   const [title, setTitle] = useState('');
   const [price, setPrice] = useState('');
   const { users, fetchUsers, setId } = useContext(UserContext);
@@ -32,7 +33,7 @@ function AddCost({ tricountId }: { tricountId: any }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="add-cost-form" onSubmit={handleSubmit}>
       <label>
         Title:
         <input type="text" value={title} onChange={e => setTitle(e.target.value)} />
@@ -66,4 +67,4 @@ function AddCost({ tricountId }: { tricountId: any }) {
   );
 }
 
-export default AddCost;
+export default AddTransaction;

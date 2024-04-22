@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useRouter } from 'next/navigation';
 import ButtonBack from "@/components/ButtonBack";
+import "../../../style.css"
 
 
 export default function RegisterPage() {
@@ -36,7 +37,7 @@ export default function RegisterPage() {
     }
     return (
         <>
-            <div>
+            <div className="register-page">
                 <form>
                     <h3>Hello !</h3>
                     <input

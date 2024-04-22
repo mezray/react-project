@@ -2,7 +2,7 @@
 import React, { useState, useContext } from "react";
 import { TricountContext } from "@/context/tricount";
 import { useRouter } from 'next/navigation'
-
+import "../app/style.css"
 
 export default function TricountForm() {
     const [title, setTitle] = useState('')
@@ -32,7 +32,7 @@ export default function TricountForm() {
       }
 
     return (
-        <>
+      <div className="tricount-form">
             <div>
                 <form onSubmit={submitData}>
                     <h4>Add a new Tricount</h4>
@@ -48,6 +48,6 @@ export default function TricountForm() {
                     />
                 </form>
             </div>
-        </>
+        </div>
     )
 }
