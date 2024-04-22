@@ -1,7 +1,8 @@
 'use client'
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useRouter } from 'next/navigation';
 import ButtonBack from "@/components/ButtonBack";
+import { TokenContext } from "@/context/tokenContext";
 import "../../../style.css"
 
 
@@ -10,6 +11,7 @@ export default function RegisterPage() {
     const [password, setPassword] = useState('')
     const [name, setName] = useState('')
     const router = useRouter()
+    const { setToken } = useContext(TokenContext)
 
     const submitData = async (e: React.SyntheticEvent, action: string) => {
         e.preventDefault()
@@ -26,6 +28,7 @@ export default function RegisterPage() {
             if (response.ok) {
                 // If the registration was successful, store the token and redirect to /pages/HomePage
                 localStorage.setItem('token', data.token)
+                setToken(data.token)
                 router.push('/pages/HomePage')
             } else {
                 // If the registration was not successful, redirect to /
