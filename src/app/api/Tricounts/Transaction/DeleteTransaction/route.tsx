@@ -6,7 +6,7 @@ export async function DELETE( request: Request) {
     const body = await request.json()
     const id = body.transactionId
 
-    const transaction = await prisma.cost.delete({
+    const transaction = await prisma.transaction.delete({
         where: {
           id: id,
       },

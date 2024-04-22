@@ -1,8 +1,8 @@
 import prisma from '@/lib/prisma'
 import { verifyToken } from '@/lib/auth';
 
-async function getCost(id: number) {
-  const cost = await prisma.cost.findMany({
+async function getTransaction(id: number) {
+  const transaction = await prisma.transaction.findMany({
   select: {
     id: true,
     title: true,
@@ -23,15 +23,15 @@ async function getCost(id: number) {
   },
 
 })
-return cost;
+return transaction;
 }
 
-export type Cost = Awaited<ReturnType<typeof getCost>>;
+export type Cost = Awaited<ReturnType<typeof getTransaction>>;
 
 export async function GET(request: Request, { params }: { params: { id: string } }) {
   verifyToken(request);
 
   const id = params.id;
-  const cost = await getCost(Number(id));
-return Response.json(cost); 
+  const transaction = await getTransaction(Number(id));
+return Response.json(transaction); 
 }

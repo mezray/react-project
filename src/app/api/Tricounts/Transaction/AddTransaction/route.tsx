@@ -6,7 +6,7 @@ export async function POST(request: Request) {
   
   const { title, price, payers, debtors, tricountId } = await request.json();
   
-  const newCost = await prisma.cost.create({
+  const newCost = await prisma.transaction.create({
     data: {
       title,
       price,

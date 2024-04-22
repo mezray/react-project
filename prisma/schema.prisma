@@ -12,7 +12,7 @@ model Tricount {
   name     String
   total    Float    @default(0)
   users    User[]   @relation("UserTricount")
-  costs    Cost[]   @relation("TricountCosts")
+  transactions    Transaction[]   @relation("TricountTransactions")
 }
 
 model User {
@@ -21,17 +21,17 @@ model User {
   email      String   @unique
   password   String
   tricounts  Tricount[]  @relation("UserTricount")
-  costs      Cost[]      @relation("Debtors")
-  paidCosts  Cost[]      @relation("PayerCosts")
+  transactions      Transaction[]      @relation("Debtors")
+  paidTransactions  Transaction[]      @relation("PayerTransactions")
 }
 
-model Cost {
+model Transaction {
   id         Int      @id @default(autoincrement())
   title      String
   price      Float
-  tricount   Tricount @relation("TricountCosts", fields: [tricountId], references: [id])
+  tricount   Tricount @relation("TricountTransactions", fields: [tricountId], references: [id])
   tricountId Int
-  payer      User     @relation("PayerCosts", fields: [payerId], references: [id])
+  payer      User     @relation("PayerTransactions", fields: [payerId], references: [id])
   payerId    Int
   debtors    User[]   @relation("Debtors")
 }
