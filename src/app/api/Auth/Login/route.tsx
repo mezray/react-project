@@ -45,7 +45,9 @@ export async function POST(request: Request, response: Response) {
       status: 401,
     })
   }
-
+  if (!SECRET_KEY) {
+    throw new Error('SECRET_KEY is not defined');
+  }
   // If the identifier and password match, generate a JWT
   const token = jwt.sign({ id: existingUser.id }, SECRET_KEY, { expiresIn: '1h' });
 

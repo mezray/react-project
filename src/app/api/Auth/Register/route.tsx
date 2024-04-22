@@ -11,7 +11,7 @@ export async function POST(request: Request) {
   const password = body.password;
   const name = body.name;
   
-  if (!email || !password) {
+  if (!email || !password || !name) {
     return NextResponse.json({
       message: "Missing something I would say"
     }, {
@@ -45,7 +45,9 @@ export async function POST(request: Request) {
       password: hashedPassword,
     },
   });
-
+  if (!SECRET_KEY) {
+    throw new Error('SECRET_KEY is not defined');
+  }
   // If the user is created successfully, generate a JWT
   const token = jwt.sign({ id: newUser.id }, SECRET_KEY, { expiresIn: '1h' });
 
