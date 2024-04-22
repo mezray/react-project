@@ -1,15 +1,15 @@
 'use client'
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useRouter } from 'next/navigation';
 import ButtonBack from "@/components/ButtonBack";
 import "../../../style.css"
-import { useToken } from "@/context/TokenContext";
+import { TokenContext } from "@/context/TokenContext";
 
 export default function LoginPage() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const router = useRouter()
-    const { setToken } = useToken();
+    const { setToken } = useContext(TokenContext)
 
     const submitData = async (e: React.SyntheticEvent, action: string) => {
         e.preventDefault()

@@ -1,9 +1,8 @@
 "use client"
-import React from 'react';
-import { useToken } from '@/context/TokenContext'; // adjust the path as needed
-
+import React, { useContext } from 'react';
+import { TokenContext } from '@/context/TokenContext';
 function LogoutButton() {
-  const { token, setToken } = useToken();
+  const { token, setToken } = useContext(TokenContext);
 
   const logout = () => {
     // Remove the token from local storage
