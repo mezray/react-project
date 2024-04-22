@@ -13,7 +13,8 @@ function AddUserToTricount({ tricountId }: { tricountId: any }) {
 
   const handleSubmit = async (event: { preventDefault: () => void; }) => {
     event.preventDefault();
-    await addUser(email)
+    await addUser(email);
+    setEmail('');
   };
 
   return (

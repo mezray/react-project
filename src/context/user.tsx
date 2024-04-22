@@ -20,7 +20,9 @@ export const UserContextProvider = (props) => {
         });
         const data = await response.json();
 
-        setUsers([...users, data.user])
+        if (data.user && !users.some(user => user.id === data.user.id)) {
+          setUsers(prevUsers => [...prevUsers, data.user]);
+        }
     }  
     
     async function fetchUsers(id: string) {
