@@ -44,7 +44,7 @@ export default function LoginPage() {
                     <input
                         autoFocus
                         onChange={(e) => setEmail(e.target.value)}
-                        placeholder="email"
+                        placeholder="email or name"
                         type="text"
                         value={email}
                     />

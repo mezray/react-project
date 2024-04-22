@@ -6,16 +6,20 @@ const SECRET_KEY = process.env.SECRET_KEY
 
 export async function POST(request: Request) {
   const body = await request.json();
-  const email = body.email;
+  const identifier = body.identifier; // This can be either name or email
   const password = body.password;
   
-  if (!email || !password) {
-    return Response.error(400, 'Email or password is missing');
+  if (!identifier || !password) {
+    return Response.error(400, 'Identifier or password is missing');
   }
 
-  const existingUser = await prisma.user.findUnique({
+  // Check for an existing user by both name and email
+  const existingUser = await prisma.user.findFirst({
     where: {
-      email: email,
+      OR: [
+        { name: identifier },
+        { email: identifier },
+      ],
     },
   });
 
@@ -28,7 +32,7 @@ export async function POST(request: Request) {
     return Response.error(401, 'Invalid password');
   }
 
-  // If the email and password match, generate a JWT
+  // If the identifier and password match, generate a JWT
   const token = jwt.sign({ id: existingUser.id }, SECRET_KEY, { expiresIn: '1h' });
 
   // Return the JWT
