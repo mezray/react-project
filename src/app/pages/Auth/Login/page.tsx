@@ -3,11 +3,13 @@ import React, { useState } from "react";
 import { useRouter } from 'next/navigation';
 import ButtonBack from "@/components/ButtonBack";
 import "../../../style.css"
+import { useToken } from "@/context/TokenContext";
 
 export default function LoginPage() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const router = useRouter()
+    const { setToken } = useToken();
 
     const submitData = async (e: React.SyntheticEvent, action: string) => {
         e.preventDefault()
@@ -23,10 +25,12 @@ export default function LoginPage() {
             if (response.ok) {
                 // If the login was successful, store the token and redirect to /pages/HomePage
                 localStorage.setItem('token', data.token)
+                setToken(data.token)
                 router.push('/pages/HomePage')
             } else {
                 // If the login was not successful, redirect to /
                 router.push('/')
+                
             }
         } catch (error) {
             console.error(error)
