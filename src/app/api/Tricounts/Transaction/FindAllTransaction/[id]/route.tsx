@@ -4,6 +4,7 @@ import { verifyToken } from '@/lib/auth';
 async function getCost(id: number) {
   const cost = await prisma.cost.findMany({
   select: {
+    id: true,
     title: true,
     price: true,
     payer: { 

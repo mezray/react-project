@@ -10,7 +10,7 @@ import "../../../style.css";
 function TricountPage({ params: { id } }) {
   const [tricounts, setTricounts] = useState(null);
   const [debts, setDebts] = useState({});
-  const { Transactions, fetchTransactions } = useContext(TransactionContext);
+  const { Transactions, fetchTransactions, deleteTransaction } = useContext(TransactionContext);
   const router = useRouter();
 
   useEffect(() => {
@@ -74,6 +74,11 @@ function TricountPage({ params: { id } }) {
               <td>{transaction.payer.name}</td>
               <td>
                 {transaction.debtors.map((debtor) => debtor.name).join(", ")}
+              </td>
+              <td>
+                <button onClick={() => deleteTransaction(transaction.id, id)}>
+                  Delete
+                </button>
               </td>
             </tr>
           ))}
