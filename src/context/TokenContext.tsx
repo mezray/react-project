@@ -3,7 +3,7 @@ import React, { createContext, useState, useContext, useEffect } from 'react';
 // Create a context for the token
 export const TokenContext = createContext( {
   token: null,
-  setToken: () => { },
+  setToken: ( token: string) => { },
 });
 
 // Create a provider for the token context

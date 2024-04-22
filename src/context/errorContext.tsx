@@ -2,7 +2,7 @@ import React, { createContext, useState, useContext, useEffect } from 'react';
 
 export const ErrorContext = createContext( {
     errorMessage: "",
-    setError: () => { },
+    setError: (errorMessage: string) => { },
 });
 
 export function ErrorContextProvider({ ...props }) {
