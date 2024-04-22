@@ -94,16 +94,23 @@ function TricountPage({ params: { id } }) {
           </tr>
         </thead>
         <tbody>
-          {Object.entries(debts).map(([name, debtToOthers], index) => (
-            <tr key={index}>
-              <td>{name} owes:</td>
-              {Object.entries(debtToOthers).map(([otherName, amount]) => (
-                <td key={otherName}>
-                  {otherName}: {amount.toFixed(2)}€
-                </td>
-              ))}
-            </tr>
-          ))}
+          {Object.entries(debts)
+            .map(([name, debtToOthers]) => ({
+              name,
+              debtToOthers,
+              netDebt: Object.values(debtToOthers).reduce((a, b) => a + b, 0),
+            }))
+            .filter(({ netDebt }) => netDebt !== 0)
+            .map(({ name, debtToOthers }) => (
+              <tr key={name}>
+                <td>{name} owes to </td>
+                {Object.entries(debtToOthers).map(([otherName, amount]) => (
+                  <td key={otherName}>
+                    {otherName} a value of {amount.toFixed(2)}€
+                  </td>
+                ))}
+              </tr>
+            ))}
         </tbody>
       </table>
       <button type="button" onClick={() => router.back()}>
