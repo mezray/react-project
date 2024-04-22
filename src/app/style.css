@@ -96,15 +96,17 @@ body {
 
 .tricount-form {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 10px;
   margin: 20px 0;
+  flex-wrap: wrap;
 }
 
 .tricount-form input {
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #ddd;
+  min-width: 100px;
 }
 
 .tricount-form input[type="submit"] {
@@ -114,7 +116,13 @@ body {
   background-color: #0070f3;
   color: white;
   cursor: pointer;
+  min-width: 100px; 
 }
+.tricount-form span {
+  font-size: 1.3em; 
+   font-weight: bold;
+}
+
 
 .tricount-form input[type="submit"]:hover {
   background-color: darken(#0070f3, 10%);

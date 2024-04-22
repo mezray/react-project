@@ -15,13 +15,14 @@ export default function HomePage() {
 
   return (
     <div className="home-page">
+      <TricountForm />
       <h1>Your Tricount's List</h1>
       {feed.map((tricount) => (
         <Link href={`/pages/TricountListing/${tricount.id}`}>
           <div>{tricount.id}. {tricount.name}</div>
         </Link>
       ))}
-      <TricountForm />
+      
     </div>
   )
 }
