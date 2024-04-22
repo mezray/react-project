@@ -23,7 +23,7 @@ export const UserContextProvider = (props) => {
         setUsers([...users, data.user])
     }  
     
-    async function fetchUsers() {
+    async function fetchUsers(id: string) {
         if (!id) return;
         const token = localStorage.getItem('token');
         const response = await fetch(`/api/Tricounts/Tricount/FindUser/${id}`, {
@@ -33,7 +33,6 @@ export const UserContextProvider = (props) => {
           },
         });
         const allUsers = await response.json();
-        debugger;
         setUsers(allUsers);
     }
   

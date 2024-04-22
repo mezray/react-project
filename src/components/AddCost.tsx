@@ -10,7 +10,7 @@ function AddCost({ tricountId }: { tricountId: any }) {
   const [debtorIds, setDebtorIds] = useState([]);
   useEffect(() => {
     setId(tricountId);
-    fetchUsers();
+    fetchUsers(tricountId);
   }, [tricountId]);
   useEffect(
     () => {
@@ -40,7 +40,9 @@ function AddCost({ tricountId }: { tricountId: any }) {
         tricountId
       }),
     });
+    
     const data = await response.json();
+    console.log(data);
   };
 
   return (
