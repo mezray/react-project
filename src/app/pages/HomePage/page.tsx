@@ -2,7 +2,7 @@
 import TricountForm from '../../../components/TricountForm';
 import Link from 'next/link';
 import { useEffect, useState, useContext } from 'react'
-import { TricountContext } from '@/context/tricount';
+import { TricountContext } from '@/context/tricountContext';
 import "../../style.css"
 
 

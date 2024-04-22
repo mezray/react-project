@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useContext } from 'react'; 
-import { UserContext } from '@/context/user';
+import { UserContext } from '@/context/userContext';
 
 function AddUserToTricount({ tricountId }: { tricountId: any }) {
   const [email, setEmail] = useState('');

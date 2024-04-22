@@ -3,8 +3,8 @@ import React, { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/navigation";
 import AddTransaction from "@/components/AddTransaction";
 import AddUserToTricount from "@/components/AddUserToTricount";
-import { UserContextProvider } from "@/context/user";
-import { TransactionContext } from "@/context/transaction";
+import { UserContextProvider } from "@/context/userContext";
+import { TransactionContext } from "@/context/transactionContext";
 import "../../../style.css";
 
 function TricountPage({ params: { id } }) {

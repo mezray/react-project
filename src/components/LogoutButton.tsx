@@ -1,6 +1,6 @@
 "use client"
 import React, { useContext } from 'react';
-import { TokenContext } from '@/context/TokenContext';
+import { TokenContext } from '@/context/tokenContext';
 function LogoutButton() {
   const { token, setToken } = useContext(TokenContext);
 

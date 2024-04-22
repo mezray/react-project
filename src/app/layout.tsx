@@ -2,9 +2,9 @@
 
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { TricountContextProvider } from "@/context/tricount";
-import { TransactionContextProvider } from "@/context/transaction";
-import { TokenContextProvider } from "@/context/TokenContext";
+import { TricountContextProvider } from "@/context/tricountContext";
+import { TransactionContextProvider } from "@/context/transactionContext";
+import { TokenContextProvider } from "@/context/tokenContext";
 import Sidebar from "@/components/SideeBar";
 
 

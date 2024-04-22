@@ -1,6 +1,6 @@
 'use client'
 import React, { useState, useContext } from "react";
-import { TricountContext } from "@/context/tricount";
+import { TricountContext } from "@/context/tricountContext";
 import { useRouter } from 'next/navigation'
 import "../app/style.css"
 

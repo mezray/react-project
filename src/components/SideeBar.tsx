@@ -1,7 +1,7 @@
 'use client'
 import React from 'react';
 import HomePage from '../app/pages/HomePage/page'
-import { TokenContextProvider } from '@/context/TokenContext';
+import { TokenContextProvider } from '@/context/tokenContext';
 import LoggoutButton from '@/components/LogoutButton';
 
 const Sidebar = () => {

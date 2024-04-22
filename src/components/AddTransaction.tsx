@@ -1,7 +1,7 @@
 "use client"
 import React, { useState, useEffect, useContext } from 'react';
-import { UserContext } from '@/context/user';
-import { TransactionContext } from '@/context/transaction';
+import { UserContext } from '@/context/userContext';
+import { TransactionContext } from '@/context/transactionContext';
 import "../app/style.css";
 
 function AddTransaction({ tricountId }: { tricountId: any }) {
