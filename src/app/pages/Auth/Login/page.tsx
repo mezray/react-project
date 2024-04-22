@@ -58,7 +58,7 @@ export default function LoginPage() {
                         type="password"
                         value={password}
                     />
-                    <p>{errorMessage}</p>
+                    <p style={{ color: `#${Math.floor(Math.random()*16777215).toString(16)}` }}>{errorMessage}</p>
                     <button type="button" onClick={(e) => submitData(e, 'Login')}>
                         Login
                     </button>
