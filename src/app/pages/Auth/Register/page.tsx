@@ -3,6 +3,7 @@ import React, { useState, useContext } from "react";
 import { useRouter } from 'next/navigation';
 import ButtonBack from "@/components/ButtonBack";
 import { TokenContext } from "@/context/tokenContext";
+import { ErrorContext } from "@/context/errorContext";
 import "../../../style.css"
 
 
@@ -12,6 +13,8 @@ export default function RegisterPage() {
     const [name, setName] = useState('')
     const router = useRouter()
     const { setToken } = useContext(TokenContext)
+    const { errorMessage, setError } = useContext(ErrorContext)
+
 
     const submitData = async (e: React.SyntheticEvent, action: string) => {
         e.preventDefault()
@@ -64,12 +67,15 @@ export default function RegisterPage() {
                         type="password"
                         value={password}
                     />
+                    <p>{errorMessage}</p>
                     <button type="button" onClick={(e) => submitData(e, 'Register')}>
                         Register
                     </button>
+                    
                 </form>
+                <ButtonBack/>
             </div>
-            <ButtonBack/>
+            
         </>
     )
 }

@@ -4,17 +4,19 @@ import { useRouter } from 'next/navigation';
 import ButtonBack from "@/components/ButtonBack";
 import "../../../style.css"
 import { TokenContext } from "@/context/tokenContext";
+import { ErrorContext } from "@/context/errorContext";
 
 export default function LoginPage() {
-    const [email, setEmail] = useState('')
+    const [identifier, setIdentifier] = useState('')
     const [password, setPassword] = useState('')
     const router = useRouter()
     const { setToken } = useContext(TokenContext)
+    const { errorMessage, setError } = useContext(ErrorContext)
 
     const submitData = async (e: React.SyntheticEvent, action: string) => {
         e.preventDefault()
         try {
-            const body = { email, password, action }
+            const body = { identifier, password, action }
             const response = await fetch(`/api/Auth/Login/`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -28,14 +30,15 @@ export default function LoginPage() {
                 setToken(data.token)
                 router.push('/pages/HomePage')
             } else {
-                // If the login was not successful, redirect to /
-                router.push('/')
-                
+                // If the login was not successful, display an error message
+                console.error(data.message)
+                setError(data.message)                
             }
         } catch (error) {
-            console.error(error)
+            console.error("error",error)
         }
     }
+
     return (
         <>
             <div className="login-page">
@@ -43,10 +46,10 @@ export default function LoginPage() {
                     <h3>Hello !</h3>
                     <input
                         autoFocus
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={(e) => setIdentifier(e.target.value)}
                         placeholder="email or name"
                         type="text"
-                        value={email}
+                        value={identifier}
                     />
                     <input
                         autoFocus
@@ -55,12 +58,14 @@ export default function LoginPage() {
                         type="password"
                         value={password}
                     />
+                    <p>{errorMessage}</p>
                     <button type="button" onClick={(e) => submitData(e, 'Login')}>
                         Login
                     </button>
                 </form>
+                <ButtonBack />
             </div>
-            <ButtonBack />
+            
         </>
     )
 }

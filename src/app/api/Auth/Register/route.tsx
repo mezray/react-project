@@ -1,6 +1,7 @@
 import prisma from '@/lib/prisma'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
+import { NextResponse } from 'next/server';
 
 const SECRET_KEY = process.env.SECRET_KEY;
 
@@ -11,7 +12,11 @@ export async function POST(request: Request) {
   const name = body.name;
   
   if (!email || !password) {
-    return Response.error(400, 'Email or password is missing');
+    return NextResponse.json({
+      message: "Missing something I would say"
+    }, {
+      status: 400,
+    })
   }
 
   const existingUser = await prisma.user.findUnique({
@@ -21,7 +26,11 @@ export async function POST(request: Request) {
   });
 
   if (existingUser) {
-    return Response.error(400, 'User already exists');
+    return NextResponse.json({
+      message: "Too late, Username already taken"
+    }, {
+      status: 400,
+    })
   }
 
   // Hash the password before storing it
@@ -41,5 +50,5 @@ export async function POST(request: Request) {
   const token = jwt.sign({ id: newUser.id }, SECRET_KEY, { expiresIn: '1h' });
 
   // Return the JWT
-  return Response.json({ token });
+  return NextResponse.json({ token });
 }

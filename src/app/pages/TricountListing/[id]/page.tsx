@@ -6,6 +6,7 @@ import AddUserToTricount from "@/components/AddUserToTricount";
 import { UserContextProvider } from "@/context/userContext";
 import { TransactionContext } from "@/context/transactionContext";
 import "../../../style.css";
+import ButtonBack from "@/components/ButtonBack";
 
 function TricountPage({ params: { id } }) {
   const [tricounts, setTricounts] = useState(null);
@@ -118,9 +119,7 @@ function TricountPage({ params: { id } }) {
             ))}
         </tbody>
       </table>
-      <button type="button" onClick={() => router.back()}>
-        Back
-      </button>
+      < ButtonBack />
     </div>
   );
 }
