@@ -11,7 +11,7 @@ export default function ButtonBack() {
     return (
         <>
             <div>
-            <button type="button" onClick={() => {setError(null); router.back();}} >
+            <button type="button" onClick={() => {setError(""); router.back();}} >
                 Back
             </button>
             </div>
