@@ -1,35 +1,31 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/navigation";
 import AddCost from "@/components/AddCost";
 import AddUserToTricount from "@/components/AddUserToTricount";
 import { UserContextProvider } from "@/context/user";
+import { TransactionContext } from "@/context/transaction";
 
 function TricountPage({ params: { id } }) {
   const [tricounts, setTricounts] = useState(null);
   const [debts, setDebts] = useState({});
+  const { Transactions, fetchTransactions } = useContext(TransactionContext);
   const router = useRouter();
 
   useEffect(() => {
-    const fetchTricounts = async () => {
-      const token = localStorage.getItem("token");
-      const response = await fetch(`/api/Tricounts/Cost/FindAllCost/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const data = await response.json();
+    fetchTransactions(id);
+  }, [id]);
 
-      setTricounts(data);
-
+  useEffect(() => {
+    console.log("why",Transactions);
       const newDebts = {};
-      data.forEach((tricount) => {
-        const amount = tricount.price / tricount.debtors.length;
-        tricount.debtors.forEach((debtor) => {
-          if (debtor.name !== tricount.payer.name) {
+      Transactions.forEach((transactions) => {
+        const amount = transactions.price / transactions.debtors.length;
+        transactions.debtors.forEach((debtor) => {
+          if (debtor.name !== transactions.payer.name) {
             newDebts[debtor.name] = newDebts[debtor.name] || {};
-            newDebts[debtor.name][tricount.payer.name] =
-              (newDebts[debtor.name][tricount.payer.name] || 0) + amount;
+            newDebts[debtor.name][transactions.payer.name] =
+              (newDebts[debtor.name][transactions.payer.name] || 0) + amount;
           }
         });
       });
@@ -46,14 +42,7 @@ function TricountPage({ params: { id } }) {
       }
 
       setDebts(newDebts);
-    };
-
-    fetchTricounts();
-  }, [id]);
-
-  if (!tricounts) {
-    return <div>Loading...</div>;
-  }
+    }, [id, Transactions])
 
   return (
     <>
@@ -67,20 +56,20 @@ function TricountPage({ params: { id } }) {
           </tr>
         </thead>
         <tbody>
-          {tricounts.map((tricount) => (
-            <tr key={tricount.id}>
-              <td>{tricount.title}</td>
-              <td>{tricount.price}€</td>
-              <td>{tricount.payer.name}</td>
+          {Transactions.map((transaction) => (
+            <tr key={transaction.id}>
+              <td>{transaction.title}</td>
+              <td>{transaction.price}€</td>
+              <td>{transaction.payer.name}</td>
               <td>
-                {tricount.debtors.map((debtor) => debtor.name).join(", ")}
+                {transaction.debtors.map((debtor) => debtor.name).join(", ")}
               </td>
             </tr>
           ))}
           <tr>
             <td>Total:</td>
             <td>
-              {tricounts.reduce((total, tricount) => total + tricount.price, 0)}
+              {Transactions.reduce((total, transaction) => total + transaction.price, 0)}
               €
             </td>
           </tr>

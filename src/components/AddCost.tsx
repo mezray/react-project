@@ -1,6 +1,7 @@
 "use client"
 import React, { useState, useEffect, useContext } from 'react';
 import { UserContext } from '@/context/user';
+import { TransactionContext } from '@/context/transaction';
 
 function AddCost({ tricountId }: { tricountId: any }) {
   const [title, setTitle] = useState('');
@@ -8,10 +9,12 @@ function AddCost({ tricountId }: { tricountId: any }) {
   const { users, fetchUsers, setId } = useContext(UserContext);
   const [payerId, setPayerId] = useState('');
   const [debtorIds, setDebtorIds] = useState([]);
+  const { addTransaction } = useContext(TransactionContext);
   useEffect(() => {
     setId(tricountId);
     fetchUsers(tricountId);
   }, [tricountId]);
+    
   useEffect(
     () => {
       if (users.length > 0) {
@@ -24,25 +27,8 @@ function AddCost({ tricountId }: { tricountId: any }) {
 
   const handleSubmit = async (event: { preventDefault: () => void; }) => {
     event.preventDefault();
-
-    const token = localStorage.getItem('token');
-    const response = await fetch('/api/Tricounts/Cost/AddCost', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        title,
-        price: parseFloat(price),
-        payers: [{ id: payerId }], // Send payer's ID instead of name
-        debtors: debtorIds.map(id => ({ id })), // Send debtor's IDs instead of names
-        tricountId
-      }),
-    });
-    
-    const data = await response.json();
-    console.log(data);
+    console.log(title, price, payerId, debtorIds, tricountId);
+    addTransaction(title, price, payerId, debtorIds, tricountId);
   };
 
   return (

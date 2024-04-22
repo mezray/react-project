@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import LoggoutButton from "@/components/LogoutButton";
 import { TricountContextProvider } from "@/context/tricount";
+import { TransactionContextProvider } from "@/context/transaction";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,7 +31,9 @@ export default function RootLayout({
           </div>
           <div style={{ flex: "1", overflow: "auto" }}>
             <TricountContextProvider>
-            {children}
+              <TransactionContextProvider>
+                {children}
+              </TransactionContextProvider>
             </TricountContextProvider>
 
             </div>
