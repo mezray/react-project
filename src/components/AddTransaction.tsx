@@ -30,6 +30,9 @@ function AddTransaction({ tricountId }: { tricountId: any }) {
     event.preventDefault();
     console.log(title, price, payerId, debtorIds, tricountId);
     addTransaction(title, price, payerId, debtorIds, tricountId);
+    // clear title and price
+    setTitle('');
+    setPrice('');
   };
 
   return (
