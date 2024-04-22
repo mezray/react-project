@@ -34,8 +34,8 @@ export default function RegisterPage() {
                 setToken(data.token)
                 router.push('/pages/HomePage')
             } else {
-                // If the registration was not successful, redirect to /
-                router.push('/')
+                setError(data.message)                
+
             }
         } catch (error) {
             console.error(error)
@@ -67,7 +67,7 @@ export default function RegisterPage() {
                         type="password"
                         value={password}
                     />
-                    <p>{errorMessage}</p>
+                   <p style={{ color: `#${Math.floor(Math.random()*16777215).toString(16)}` }}>{errorMessage}</p>
                     <button type="button" onClick={(e) => submitData(e, 'Register')}>
                         Register
                     </button>
