@@ -8,8 +8,17 @@ export const TransactionContext = createContext( {
     deleteTransaction: () => { },
  } );
 
+ type Transaction = { 
+    id: string,
+    title: string,
+    price: number,
+    payers: { id: string, name: string }[],
+    debtors: { id: string, name: string }[],
+    tricountId: string,
+  };
+
 export const TransactionContextProvider = (props) => {
-    const [ Transactions, setTransactions] = useState([])
+    const [ Transactions, setTransactions] = useState<Transaction[]>([])
 
       async function addTransaction (title, price, payerId, debtorIds, tricountId) {
         const token = localStorage.getItem('token');
@@ -37,7 +46,7 @@ export const TransactionContextProvider = (props) => {
             'Authorization': `Bearer ${token}`,
           },
         });
-        const Transactions = await response.json();
+        const Transactions: Transaction[] = await response.json();
         setTransactions(Transactions)
 
       }
