@@ -18,6 +18,19 @@ export async function POST(request: Request, { params }: { params: { id: string 
     })
   }
 
+  const tricount =await prisma.tricount.findUnique({
+    where: { id: parseInt(tricountId) },
+    select: { users: { where: { id: user.id } } },
+  });
+
+  if (tricount && tricount.users.some(u => u.id === user.id)) {
+    return NextResponse.json({
+      message: "User is already in the tricount"
+    }, {
+      status: 400,
+    })
+  }
+
   await prisma.tricount.update({
     where: { id: parseInt(tricountId) },
     data: {

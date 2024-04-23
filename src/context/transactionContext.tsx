@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from 'react';
+import { ErrorContext } from './errorContext';
 
 type TransactionContextType = {
   Transactions: Transaction[];
@@ -27,6 +28,7 @@ export const TransactionContext = createContext<TransactionContextType>( {
 
 export const TransactionContextProvider = (props: any) => {
     const [ Transactions, setTransactions] = useState<Transaction[]>([])
+    const { setAddUserMessage, setTransactionMessage } = useContext(ErrorContext);
 
     async function addTransaction (
         title: string, 
@@ -75,6 +77,8 @@ export const TransactionContextProvider = (props: any) => {
           },
           body: JSON.stringify({ transactionId, tricountId }),
         });
+        setTransactionMessage("")
+        setAddUserMessage("")
         fetchTransactions(tricountId);
       }
 

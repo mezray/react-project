@@ -20,7 +20,7 @@ export function TokenContextProvider({ ...props }) {
 
   return (
     <TokenContext.Provider value={{ token, setToken: setToken }}>
-&      {props.children}
+      {props.children}
     </TokenContext.Provider>
   );
 }

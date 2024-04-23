@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { UserContext } from '@/context/userContext';
 import { TransactionContext } from '@/context/transactionContext';
+import { ErrorContext } from '@/context/errorContext';
 import "../app/style.css";
 
 function AddTransaction({ tricountId }: { tricountId: any }) {
@@ -11,6 +12,7 @@ function AddTransaction({ tricountId }: { tricountId: any }) {
   const [payerId, setPayerId] = useState('');
   const [debtorIds, setDebtorIds] = useState<string[]>([]);
   const { addTransaction } = useContext(TransactionContext);
+  const { transactionMessage, setTransactionMessage } = useContext(ErrorContext);
   useEffect(() => {
     setId(tricountId);
     fetchUsers(tricountId);
@@ -32,6 +34,7 @@ function AddTransaction({ tricountId }: { tricountId: any }) {
     // clear title and price
     setTitle('');
     setPrice('');
+    setTransactionMessage("Transaction added successfully!")
   };
 
   return (
@@ -65,6 +68,7 @@ function AddTransaction({ tricountId }: { tricountId: any }) {
         </select>
       </label>
       <input type="submit" value="Submit" />
+      <p style={{ color: `#${Math.floor(Math.random()*16777215).toString(16)}` }}>{transactionMessage}</p>
     </form>
   );
 }

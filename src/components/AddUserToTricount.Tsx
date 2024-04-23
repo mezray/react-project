@@ -7,7 +7,7 @@ import { ErrorContext } from '@/context/errorContext';
 function AddUserToTricount({ tricountId }: { tricountId: any }) {
   const [email, setEmail] = useState('');
   const { users, addUser, setId } = useContext(UserContext);
-  const { errorMessage, setError } = useContext(ErrorContext);
+  const { addUserMessage, setAddUserMessage } = useContext(ErrorContext);
   useEffect(() => {
     setId(tricountId)
   }, [tricountId])
@@ -17,10 +17,10 @@ function AddUserToTricount({ tricountId }: { tricountId: any }) {
   event.preventDefault();
   const message = await addUser(email);
   if (!message)  {
-    setError("User not found with this email");
+    setAddUserMessage("User already in the tricount or wrong email");
     return;
   }else{
-  setError('User added successfully');
+    setAddUserMessage('User added successfully');
   setEmail('');
   }
 }
@@ -33,7 +33,7 @@ function AddUserToTricount({ tricountId }: { tricountId: any }) {
       </label>
       <button type="submit">Add User</button>
       <div>
-      {errorMessage && <p className="error">{errorMessage}</p>}
+      <p style={{ color: `#${Math.floor(Math.random()*16777215).toString(16)}` }}>{addUserMessage}</p>
       </div>
     </form>
   );
