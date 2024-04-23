@@ -2,7 +2,7 @@ import { createContext, useContext, useState } from 'react';
 
 export const TricountContext = createContext( { feed: [], updateFeed: () => {} } );
 
-export const TricountContextProvider = (props) => {
+export const TricountContextProvider = (props: React.PropsWithChildren<{}>) => {
     const [feed, setFeed] = useState([])
   
     const updateFeed = async () => {

@@ -1,17 +1,29 @@
 import { createContext, useContext, useState } from 'react';
 import { ErrorContext } from './errorContext';
 
-export const UserContext = createContext({
+
+type UserContextType = {
+  users: {
+    name: string; id: string, email: string 
+}[];
+  addUser: (email: string) => Promise<boolean>;
+  fetchUsers: (id: string) => Promise<void>;
+  id: string;
+  setId: (id: string) => void;
+};
+
+export const UserContext = createContext<UserContextType>({
   users: [],
-  addUser: async (email: string) => { },
-  fetchUsers: () => { },
+  addUser: async (email: string) => false,
+  fetchUsers: async (id: string) => { },
   id: '',
   setId: () => { }
 });
 
-export const UserContextProvider = (props) => {
+
+export const UserContextProvider = (props: React.PropsWithChildren<{}>) => {
   const [id, setId] = useState('')
-  const [users, setUsers] = useState([])
+  const [users, setUsers] = useState<{ name: string; id: string; email: string }[]>([]);([])
   const { setError } = useContext(ErrorContext);
 
   async function addUser(email: string) {
@@ -27,11 +39,11 @@ export const UserContextProvider = (props) => {
 
   const data = await response.json();
 
-  if (data.user && !users.some(user => user.id === data.user.id)) {
+  if (data.user && !users.some((user: { id: string }) => user.id === data.user.id)) {
     setUsers(prevUsers => [...prevUsers, data.user]);
     return true;
-  } else{
-  return false;
+  } else {
+    return false;
   }
 }
 

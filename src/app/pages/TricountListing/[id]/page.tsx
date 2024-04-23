@@ -19,7 +19,7 @@ function TricountPage({ params: { id } }) {
   }, [id]);
 
   useEffect(() => {
-    const newDebts = {};
+    const newDebts: { [key: string]: { [key: string]: number } } = {};
     Transactions.forEach((transactions) => {
       const amount = transactions.price / transactions.debtors.length;
       transactions.debtors.forEach((debtor) => {
@@ -103,7 +103,7 @@ function TricountPage({ params: { id } }) {
             .map(([name, debtToOthers]) => ({
               name,
               debtToOthers,
-              netDebt: Object.values(debtToOthers).reduce((a, b) => a + b, 0),
+              netDebt: Object.values(debtToOthers).reduce((a: number, b) => a + b, 0),
             }))
             .filter(({ netDebt }) => netDebt !== 0)
             .map(({ name, debtToOthers }) => (

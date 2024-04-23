@@ -9,7 +9,7 @@ function AddTransaction({ tricountId }: { tricountId: any }) {
   const [price, setPrice] = useState('');
   const { users, fetchUsers, setId } = useContext(UserContext);
   const [payerId, setPayerId] = useState('');
-  const [debtorIds, setDebtorIds] = useState([]);
+  const [debtorIds, setDebtorIds] = useState<string[]>([]);
   const { addTransaction } = useContext(TransactionContext);
   useEffect(() => {
     setId(tricountId);
@@ -28,7 +28,7 @@ function AddTransaction({ tricountId }: { tricountId: any }) {
 
   const handleSubmit = async (event: { preventDefault: () => void; }) => {
     event.preventDefault();
-    addTransaction(title, price, payerId, debtorIds, tricountId);
+    addTransaction(title, Number(price), payerId, debtorIds, tricountId);
     // clear title and price
     setTitle('');
     setPrice('');
@@ -38,27 +38,27 @@ function AddTransaction({ tricountId }: { tricountId: any }) {
     <form className="add-cost-form" onSubmit={handleSubmit}>
       <label>
         Title:
-        <input type="text" value={title} onChange={e => setTitle(e.target.value)} />
+        <input type="text" value={title} onChange={e => setTitle(e.target.value)} required />
       </label>
       <label>
         Price:
-        <input type="number" value={price} onChange={e => setPrice(e.target.value)} />
+        <input type="number" value={price} onChange={e => setPrice(e.target.value)} required />
       </label>
       <label>
         Payer:
         <select value={payerId} onChange={e => setPayerId(e.target.value)}>
           {users.map(user => (
             <option key={user.id} value={user.id}>
-              {user.name}
+             {user.name}
             </option>
           ))}
         </select>
       </label>
       <label>
         Debtors:
-        <select multiple value={debtorIds} onChange={e => setDebtorIds(Array.from(e.target.selectedOptions, option => option.value))}>
+        <select multiple value={debtorIds} onChange={e => setDebtorIds(Array.from(e.target.selectedOptions, option => option.value))} required>
           {users.map(user => (
-            <option key={user.id} value={user.id}>
+            <option key={user.id} value={user.id} >
               {user.name}
             </option>
           ))}

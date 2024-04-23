@@ -16,7 +16,7 @@ export async function POST(request: Request) {
         },
       },
       debtors: {
-        connect: debtors.map(debtor => ({ id: parseInt(debtor.id) })),
+        connect: debtors.map((debtor: { id: string }) => ({ id: parseInt(debtor.id) })),
       },
       tricount: {
         connect: {

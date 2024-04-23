@@ -6,18 +6,18 @@ export const ErrorContext = createContext( {
 });
 
 export function ErrorContextProvider({ ...props }) {
-    const [errorMessage, setError] = useState(null);
+    const [errorMessage, setError] = useState("");
 
-useEffect(() => {
-    const storedError = localStorage.getItem('error');
-    
-}, []);
+    useEffect(() => {
+        const storedError = localStorage.getItem('error');
+        
+    }, []);
 
 
 
-return (
-    <ErrorContext.Provider value={{ errorMessage, setError }}>
-        {props.children}
-    </ErrorContext.Provider>
-);
+    return (
+        <ErrorContext.Provider value={{ errorMessage, setError }}>
+            {props.children}
+        </ErrorContext.Provider>
+    );
 }

@@ -1,6 +1,7 @@
 "use client"
 import React, { useContext } from 'react';
 import { TokenContext } from '@/context/tokenContext';
+
 function LogoutButton() {
   const { token, setToken } = useContext(TokenContext);
 
@@ -8,7 +9,7 @@ function LogoutButton() {
     // Remove the token from local storage
     localStorage.removeItem('token');
     // Update the token state
-    setToken(null);
+    setToken("");
     // Redirect to login page
     window.location.href = '/';
   };

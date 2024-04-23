@@ -1,6 +1,14 @@
 import { createContext, useContext, useState } from 'react';
 
-export const TransactionContext = createContext( { 
+type TransactionContextType = {
+  Transactions: Transaction[];
+  addTransaction: (title: string, price: number, payerId: string, debtorIds: string[], tricountId: string) => void;
+  fetchTransactions: (tricountId: string) => void;
+  setTransactions: (transactions: Transaction[]) => void;
+  deleteTransaction: (transactionId: string, tricountId: string) => void;
+};
+
+export const TransactionContext = createContext<TransactionContextType>( { 
     Transactions: [],
     addTransaction: () => { },
     fetchTransactions: () => { },
@@ -12,15 +20,21 @@ export const TransactionContext = createContext( {
     id: string,
     title: string,
     price: number,
-    payers: { id: string, name: string }[],
+    payer: { id: string, name: string }[],
     debtors: { id: string, name: string }[],
     tricountId: string,
   };
 
-export const TransactionContextProvider = (props) => {
+export const TransactionContextProvider = (props: any) => {
     const [ Transactions, setTransactions] = useState<Transaction[]>([])
 
-      async function addTransaction (title, price, payerId, debtorIds, tricountId) {
+    async function addTransaction (
+        title: string, 
+        price: number,
+        payerId: string,
+        debtorIds: string[], 
+        tricountId: string
+      ) {
         const token = localStorage.getItem('token');
         const response = await fetch('/api/Tricounts/Transaction/AddTransaction', {
           method: 'POST',
@@ -30,7 +44,7 @@ export const TransactionContextProvider = (props) => {
           },
           body: JSON.stringify({
             title,
-            price: parseFloat(price),
+            price: parseFloat(price.toString()),
             payers: [{ id: payerId }], // Send payer's ID instead of name
             debtors: debtorIds.map(id => ({ id })), // Send debtor's IDs instead of names
             tricountId
@@ -39,7 +53,7 @@ export const TransactionContextProvider = (props) => {
           fetchTransactions(tricountId);
          };
 
-      async function fetchTransactions(tricountId) {
+      async function fetchTransactions(tricountId: string) {
         const token = localStorage.getItem('token');
         const response = await fetch(`/api/Tricounts/Transaction/FindAllTransaction/${tricountId}`, {
           headers: {
@@ -51,7 +65,7 @@ export const TransactionContextProvider = (props) => {
 
       }
 
-      async function deleteTransaction(transactionId, tricountId) {
+      async function deleteTransaction(transactionId: any, tricountId: string) {
         const token = localStorage.getItem('token');
         const response = await fetch(`/api/Tricounts/Transaction/DeleteTransaction/`, {
           method: 'DELETE',
