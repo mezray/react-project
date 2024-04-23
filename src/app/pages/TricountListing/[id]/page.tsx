@@ -8,7 +8,7 @@ import { TransactionContext } from "@/context/transactionContext";
 import "../../../style.css";
 import ButtonBack from "@/components/ButtonBack";
 
-function TricountPage({ params: { id } }) {
+function TricountPage({ params: { id } }: { params: { id: number } }) {
   const [tricounts, setTricounts] = useState(null);
   const [debts, setDebts] = useState({});
   const { Transactions, fetchTransactions, deleteTransaction } = useContext(TransactionContext);
