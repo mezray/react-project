@@ -15,7 +15,7 @@ function TricountPage({ params: { id } }: { params: { id: number } }) {
   const router = useRouter();
 
   useEffect(() => {
-    fetchTransactions(id);
+    fetchTransactions(id.toString());
   }, [id]);
 
   useEffect(() => {
