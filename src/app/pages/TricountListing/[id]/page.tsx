@@ -8,14 +8,14 @@ import { TransactionContext } from "@/context/transactionContext";
 import "../../../style.css";
 import ButtonBack from "@/components/ButtonBack";
 
-function TricountPage({ params: { id } }: { params: { id: number } }) {
+function TricountPage({ params: { id } }: { params: { id: string } }) {
   const [tricounts, setTricounts] = useState(null);
   const [debts, setDebts] = useState({});
   const { Transactions, fetchTransactions, deleteTransaction } = useContext(TransactionContext);
   const router = useRouter();
 
   useEffect(() => {
-    fetchTransactions(id.toString());
+    fetchTransactions(id);
   }, [id]);
 
   useEffect(() => {
