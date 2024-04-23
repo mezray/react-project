@@ -36,11 +36,11 @@ export default function RootLayout({
             </div>
             <div style={{ flex: "1", overflow: "auto" }}>
               <ErrorContextProvider>  
-              <TricountContextProvider>
-                <TransactionContextProvider>
-                  {children}
-                </TransactionContextProvider>
-              </TricountContextProvider>
+                <TricountContextProvider>
+                  <TransactionContextProvider>
+                    {children}
+                  </TransactionContextProvider>
+                </TricountContextProvider>
               </ErrorContextProvider>
             </div>
           </div>

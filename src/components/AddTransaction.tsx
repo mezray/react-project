@@ -28,7 +28,6 @@ function AddTransaction({ tricountId }: { tricountId: any }) {
 
   const handleSubmit = async (event: { preventDefault: () => void; }) => {
     event.preventDefault();
-    console.log(title, price, payerId, debtorIds, tricountId);
     addTransaction(title, price, payerId, debtorIds, tricountId);
     // clear title and price
     setTitle('');

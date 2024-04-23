@@ -19,7 +19,6 @@ function TricountPage({ params: { id } }) {
   }, [id]);
 
   useEffect(() => {
-    console.log("why", Transactions);
     const newDebts = {};
     Transactions.forEach((transactions) => {
       const amount = transactions.price / transactions.debtors.length;

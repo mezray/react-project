@@ -1,5 +1,6 @@
 import prisma from '@/lib/prisma';
 import { verifyToken } from '@/lib/auth';
+import { NextResponse} from 'next/server';
 
 
 export async function POST(request: Request, { params }: { params: { id: string } }) {
@@ -10,7 +11,11 @@ export async function POST(request: Request, { params }: { params: { id: string 
 
   const user = await prisma.user.findUnique({ where: { email } });
   if (!user) {
-    return Response.json({ error: 'No user found with this email' }, { status: 400 });
+    return NextResponse.json({
+      message: "No user found with this email"
+    }, {
+      status: 400,
+    })
   }
 
   await prisma.tricount.update({

@@ -13,7 +13,6 @@ export function TokenContextProvider({ ...props }) {
   // Check if a token exists in local storage when the component mounts
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
-    console.log(storedToken);
     if (storedToken) {
       setToken(storedToken);
     }

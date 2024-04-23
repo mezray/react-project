@@ -43,7 +43,6 @@ export const TransactionContextProvider = (props) => {
       }
 
       async function deleteTransaction(transactionId, tricountId) {
-        console.log(transactionId, tricountId);
         const token = localStorage.getItem('token');
         const response = await fetch(`/api/Tricounts/Transaction/DeleteTransaction/`, {
           method: 'DELETE',

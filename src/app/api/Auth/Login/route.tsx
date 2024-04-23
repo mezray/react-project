@@ -9,7 +9,6 @@ export async function POST(request: Request, response: Response) {
   const body = await request.json();
   const identifier = body.identifier; // This can be either name or email
   const password = body.password;
-  console.log(body.identifier, body.password)
   
   if (!identifier || !password) {
     return NextResponse.json({
