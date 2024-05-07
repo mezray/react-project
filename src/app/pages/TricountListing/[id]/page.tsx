@@ -7,6 +7,7 @@ import { UserContextProvider } from "@/context/userContext";
 import { TransactionContext } from "@/context/transactionContext";
 import "../../../style.css";
 import ButtonBack from "@/components/ButtonBack";
+import PenguinButton from "@/components/PenguinButton";
 
 
 function TricountPage({ params: { id } }: { params: { id: string } }) {
@@ -50,11 +51,11 @@ function TricountPage({ params: { id } }: { params: { id: string } }) {
     <div className="tricount-page">
       <UserContextProvider>
         <div>
-          Add a friend !
+          <u><strong>Add a friend :</strong></u>
           <AddUserToTricount tricountId={id} />
         </div>
         <div>
-          Add a new Transaction
+        <u><strong>Add a new Transaction :</strong></u>
           <AddTransaction tricountId={id} />
         </div>
       </UserContextProvider>

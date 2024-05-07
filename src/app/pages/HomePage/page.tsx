@@ -16,6 +16,8 @@ export default function HomePage() {
     updateFeed()
   }, [])
 
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
     <>
     <div className="home-page">
@@ -26,8 +28,14 @@ export default function HomePage() {
           <div>{tricount.id}. {tricount.name}</div>
         </Link>
       ))}
-    <img src="/cleaning.gif" width={500} height={350} /> 
-      
+      <img 
+        src="/cleaning.gif" 
+        width={250} 
+        height={175} 
+        style={{ filter: isHovered ? 'none' : 'blur(50px)' }}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      /> 
     </div>
     </>
   )

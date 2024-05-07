@@ -1,12 +1,13 @@
 :root {
     --primary-color: #0070f3;
     --text-color: #333;
-    --background-color: #f5f5f5;
+    --background-color: #ffffff;
 }
 
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
+    background-color: #ffffff;
 }
 
 .welcome-page {
@@ -73,7 +74,7 @@ body {
   align-items: center;
   justify-content: center;
   padding: 10px;
-  background-color: #f5f5f5;
+  background-color: #ffffff;
 }
 
 .home-page h1 {

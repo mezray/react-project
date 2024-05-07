@@ -27,7 +27,7 @@ export default function RootLayout({
                 flex: "0 0 200px",
                 height: "100vh",
                 overflow: "auto",
-                backgroundColor: "#f5f5f5",
+                backgroundColor: "#fffff",
               }}
             >
               <Sidebar />
