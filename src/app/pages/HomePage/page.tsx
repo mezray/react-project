@@ -26,7 +26,7 @@ export default function HomePage() {
           <div>{tricount.id}. {tricount.name}</div>
         </Link>
       ))}
-    <img src="/cleaning.gif" /> 
+    <img src="/cleaning.gif" width={500} height={350} /> 
       
     </div>
     </>
