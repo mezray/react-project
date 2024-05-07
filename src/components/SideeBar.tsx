@@ -10,7 +10,7 @@ const Sidebar = () => {
         <button onClick={() => window.open('https://github.com/mezray/react-project')}>Github Repository</button>
         <LoggoutButton />
         <div className="bottom-gif">
-        <a href="https://newcp.net" target="_blank">
+        <a href="https://nguyen.me.uk/teaching/web-architecture/01-react#/1" target="_blank">
             <img src="/club.gif" width="200" height="200" />
         </a>
     </div>
