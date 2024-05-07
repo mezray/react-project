@@ -21,7 +21,7 @@ export const TransactionContext = createContext<TransactionContextType>( {
     id: string,
     title: string,
     price: number,
-    payer: { id: string, name: string }[],
+    payer: { id: string, name: string },
     debtors: { id: string, name: string }[],
     tricountId: string,
   };

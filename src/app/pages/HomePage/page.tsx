@@ -17,6 +17,7 @@ export default function HomePage() {
   }, [])
 
   return (
+    <>
     <div className="home-page">
       <TricountForm />
       <h1>Your Tricount's List</h1>
@@ -25,7 +26,9 @@ export default function HomePage() {
           <div>{tricount.id}. {tricount.name}</div>
         </Link>
       ))}
+    <img src="/cleaning.gif" /> 
       
     </div>
+    </>
   )
 }

@@ -67,7 +67,8 @@ export default function RegisterPage() {
                         type="password"
                         value={password}
                     />
-                   <p style={{ color: `#${Math.floor(Math.random()*16777215).toString(16)}` }}>{errorMessage}</p>
+                    <p style={{ color: `#${Math.floor(Math.random()*16777215).toString(16)}` }}>{errorMessage}</p>
+                    {errorMessage && <img src="/slap.gif" />}
                     <button type="button" onClick={(e) => submitData(e, 'Register')}>
                         Register
                     </button>
