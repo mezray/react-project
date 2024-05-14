@@ -110,10 +110,10 @@ function TricountPage({ params: { id } }: { params: { id: string } }) {
             .filter(({ netDebt }) => netDebt !== 0)
             .map(({ name, debtToOthers }) => (
               <tr key={name}>
-                <td>{name} owes to </td>
+                <td>{name}  </td>
                 {Object.entries(debtToOthers).map(([otherName, amount]) => (
                   <td key={otherName}>
-                    {otherName} a value of {amount.toFixed(2)}€
+                    owes to {otherName} a value of {amount.toFixed(2)}€
                   </td>
                 ))}
               </tr>
